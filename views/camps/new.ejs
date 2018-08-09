@@ -1,0 +1,78 @@
+<% include ../partials/header %>
+
+    <div class="new-camp">
+		<div class="container">
+			<div class="row row justify-content-center">
+				<div class="col-sm-12 col-lg-10">
+					<a href="/campgrounds"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</a>
+					<h3>Create New Camp</h3>
+					<form action="/campgrounds" enctype="multipart/form-data" method="POST">
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label for="name">Name</label>
+								<input type="text" name="name" class="form-control" placeholder="Name">
+							</div>
+							<div class="col-sm-6">
+								<label for="price">Price</label>
+								<div class="input-group mb-3">
+	  								<div class="input-group-prepend">
+	    								<span class="input-group-text">$</span>
+	  								</div>
+	  								<input type="number" name="price" class="form-control" placeholder="99">
+	  								<div class="input-group-append">
+	    								<span class="input-group-text">.00</span>
+	  								</div>
+								</div>
+							</div>
+							<div class="form-group col-sm-12">
+					    		<label for="image">Image/Slides</label>
+								<div class="view-wrap">
+									<div class="img-preview">
+									</div>							
+									<div class="toolbar-button clearfix">
+										<label for="file-upload-many" class="custom-file-upload">
+	    									<i class="fa fa-cloud-upload"></i> Upload Image
+										</label>
+										<input id="file-upload-many" name="image" type="file" accept="image/*" multiple>
+										<a class="btn btn-outline-dark cancel many">Cancel</a>
+									</div>
+								</div>
+					  		</div>
+					  		<div class="form-group col-sm-12">
+						    	<label for="description">Description</label>
+						      	<textarea name="description" class="form-control" placeholder="Description" rows="6"></textarea>
+						  	</div>
+							<div class="form-group col-md-6">
+						    	<label for="features">Features</label>
+						    	<select multiple="multiple" id="features" name="features">
+	      						<% 
+									const optionFeatures = ["Toilets", "Shower", "Trash", "RV sanitation", "Picnic table", "RV hookup"];
+									optionFeatures.forEach(item => { %>
+										<option value="<%= item %>"><%= item %></option>
+									<% })
+								%>
+	   							</select>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label for="activities">Activities</label>
+						    	<select multiple="multiple" id="activities" name="activities">
+								<%
+									const optionActivity = ["Biking", "Paddling", "Whitewater paddling", "OHV", "Horseback riding", "Swimming", "Wind sports", "Hiking", "Snow Sports", "Boating", "Fishing", "Climbing", "Wildlife watching", "Surfing"];
+									optionActivity.forEach(item => { %>
+										<option value="<%= item %>"><%= item %></option>
+									<% })
+								%>
+	   							</select>
+						  	</div>
+						  	<div class="form-group col-sm-12 text-right">
+						  		<a class="btn btn-secondary" href="/campgrounds">Cancel</a>
+						  		<button type="submit" class="btn btn-success">Save</button>
+						  	</div>
+						</div>
+					</form>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+<% include ../partials/footer %>

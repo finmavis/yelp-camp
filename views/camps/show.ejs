@@ -1,0 +1,134 @@
+<% include ../partials/header %>
+
+    <div class="camp">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-sm-12 col-lg-10">
+					<div class="button-tool-back">
+						<a href="/campgrounds" class="back"><i class="fa fa-angle-left" aria-hidden="true"></i> Back</a>	
+					</div>
+					<% if(currentUser && camp.author.id.equals(currentUser._id)){ %>
+					<div class="btn-tool-camp pull-right">
+						<a href="/campgrounds/<%= camp._id %>/edit" data-toggle="tooltip" data-placement="bottom" title="Edit Campground"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+						<form action="/campgrounds/<%= camp._id %>?_method=DELETE" method="POST">
+							<button type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete Campground"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+						</form>
+					</div>
+					<% } %>
+					<div class="clearfix"></div>
+					<div class="card need-margin">
+						<div class="slides">
+							<div id="carousel-camps" class="carousel slide" data-ride="carousel">
+		  						<ol class="carousel-indicators">
+								  	<% camp.image.forEach((item, index)=> {
+										const classes = (index === 0) ? "active" : ""; %>
+										<li data-target="#carousel-camps" data-slide-to="<%= index %>" class="<%= classes %>"></li>
+									<% }) %>
+		  						</ol>
+		  						<div class="carousel-inner">
+								  	<% camp.image.forEach((item, index) => {
+										const classes = (index === 0) ? "carousel-item active" : "carousel-item"; %>
+										<div class="<%= classes %>">
+		      								<img class="d-block rounded" src="<%= item %>" alt="<%= index %>">
+		    							</div>
+									<% }); %>
+		  						</div>
+		  						<a class="carousel-control-prev" href="#carousel-camps" role="button" data-slide="prev">
+		    						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    						<span class="sr-only">Previous</span>
+		  						</a>
+		  						<a class="carousel-control-next" href="#carousel-camps" role="button" data-slide="next">
+		    						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    						<span class="sr-only">Next</span>
+		  						</a>
+							</div>
+						</div>
+						<hr class="mx-auto">
+						<div class="card-body">
+							<h5><a href="/campgrounds/<%= camp._id %>" class="card-title"><%= camp.name %></a></h5>
+							<p class="float-right">$ <%= camp.price.toFixed(2) %>/night</p>
+    						<p><%= camp.description %></p>
+    						<div class="extend-info">
+								<div class="features">
+									<p><strong>Features</strong></p>
+									<div class="row">
+										<% camp.features.forEach(item => { %>
+										<div class="col-6">
+											<p><li><%= item %></li></p>
+										</div>
+										<% }) %>
+									</div>
+								</div>
+								<div class="activities">
+									<p><strong>Activities</strong></p>
+									<div class="row">
+										<% camp.activities.forEach(item => { %>
+										<div class="col-6">
+											<p><li><%= item %></li></p>
+										</div>
+										<% }) %>
+									</div>
+								</div>
+    						</div>
+    						<p><small><em>Hosted by <a href="/profile/<%= camp.author.id %>"><%= camp.author.firstname %> <%= camp.author.lastname %></a></em></small></p>
+						</div>
+					</div>
+					<div class="comment">
+						<div class="card need-margin">
+							<div class="card-header text-center">
+								<p><strong>Review</strong></p>
+  							</div>
+  							<div class="card-body">
+  								<div class="write-review">
+								  	<form action="/campgrounds/<%= camp._id %>/comments" method="POST">
+										<div class="form-group">
+											<textarea name="review" class="form-control" id="review" rows="6" placeholder="Have you camped there? Leave a review for your fellow campers!" required></textarea>
+											<div class="pull-right">
+												<button class="btn btn-success" type="submit">Post</button>
+											</div>
+										</div>
+									</form>
+  								</div>
+  								<div class="clearfix"></div>
+  								<div class="review-list">
+  									<ul class="list-unstyled">
+									  	<% camp.comments.forEach(comment => { %>
+										<li class="media">
+   											<a href="/profile/<%= comment.author.id %>"><img class="mr-3 rounded-circle" src="<%= comment.author.image %>"></a>
+    										<div class="media-body">
+												<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+    											<div class="tool pull-right">
+    												<a href="#" class="edit" data-toggle="tooltip" data-placement="bottom" title="Edit Review"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    												<form action="/campgrounds/<%= camp._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+														<button type="submit" data-toggle="tooltip" data-placement="bottom" title="Delete Review"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+													</form>
+    											</div>
+												<% } %>
+      											<a href="/profile/<%= comment.author.id %>"><strong><%= comment.author.firstname %> <%= comment.author.lastname %></strong></a>
+      											<span class="date-review"><small><%= moment(comment.date).format("LL") %></small></span>
+      											<p><%= comment.text %></p>
+												<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+												<div class="user-text-edit">
+													<form action="/campgrounds/<%= camp._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+      												<textarea name="updatereview" class="form-control" id="user-text-edit-area" rows="5"></textarea>
+      												<div class="pull-right">
+								    					<button class="btn btn-danger cancel">Cancel</button>
+								    					<button class="btn btn-success">Save</button>
+								    				</div>
+      											</div>
+												<% } %>
+    										</div>
+  										</li>
+  										<hr>
+										<% }) %>
+									</ul>
+  								</div>
+  							</div>
+						</div>	
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+<% include ../partials/footer %>

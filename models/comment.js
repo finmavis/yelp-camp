@@ -1,0 +1,17 @@
+const mongoose = require("mongoose");
+
+const commentSchema = mongoose.Schema({
+    text: String,
+    author: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }, 
+        firstname: String,
+        lastname: String,
+        image: String
+    },
+    date: {type: Date, default: Date.now}
+});
+
+module.exports = mongoose.model("Comment", commentSchema);
