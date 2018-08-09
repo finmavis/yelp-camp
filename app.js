@@ -53,6 +53,6 @@ app.use(function (err, req, res, next) {
     res.end();
 });
 
-app.listen(1234, process.env.IP, () => {
+app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server Started!");
 });
