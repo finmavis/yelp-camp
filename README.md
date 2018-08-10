@@ -24,6 +24,16 @@ demotiga | demo
 
 ## Plan
 
+### Index Routes
+Verb | Routes | Description
+------------ | ------------- | -------------
+GET | / | Show Home Page
+GET | /login | Show Login Page
+POST | /login | Auth User
+GET | /signup | Show Signup Page
+POST | /signup | Create new user
+GET | /logout | User sign out
+
 ### Campground Routes 
 Verb | Routes | Description
 ------------ | ------------- | -------------
