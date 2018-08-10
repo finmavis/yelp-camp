@@ -1,7 +1,8 @@
 # YelpCamp
 
-## Demo
-you can see the demo at [Heroku](https://yelp-camp-stack.herokuapp.com/).
+## Live Demo
+To see the app in action, go to [Heroku](https://yelp-camp-stack.herokuapp.com/).
+
 ### Demo Account
 Username | Password
 ------------ | -------------
@@ -40,3 +41,11 @@ Verb | Routes | Description
 POST | /campgrounds/:campid/comments | Create new Comment
 PUT | /campgrounds/:campid/comments/:commentid | Update a Comment
 DELETE | /campgrounds/:campid/comments/:commentid | Delete a Comment
+
+### Profile Routes 
+Verb | Routes | Description
+------------ | ------------- | -------------
+GET | /profile/:profileid | Show Single Profile/Account
+PUT | /profile/:profileid | Update profile/Account
+DELETE | /profile/:profileid | Delete Profile/Account
+GET | /profile/:profileid/edit | Edit page Profile/Account
