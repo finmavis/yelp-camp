@@ -5,6 +5,7 @@ const bodyparser = require("body-parser");
 const passport = require("passport");
 const localstrategy = require("passport-local");
 const flash = require("connect-flash");
+const helmet = require("helmet");
 
 const campRoute = require("./routes/camp");
 const commentRoute = require("./routes/comment");
@@ -19,6 +20,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 app.use(flash());
+app.use(helmet());
 
 app.use(require("express-session")({
     secret: config.sessionSecret,
